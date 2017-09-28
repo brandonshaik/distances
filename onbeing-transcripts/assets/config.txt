@@ -1,0 +1,3 @@
+original_doc_root=/Users/fry/Dropbox/data/disco/onbeing/disco
+document_source=scraped
+document_thresh=1

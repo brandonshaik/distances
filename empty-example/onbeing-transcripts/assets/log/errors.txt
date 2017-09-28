@@ -1,0 +1,10 @@
+Word too long: great-great-great-great-great-grandkids
+Word too long: can't-tell-one-brand-of-coffee-from-another-brand-of-coffee
+Word too long: paleoanthropologist-turned-novelist
+Word too long: open-to-anyone-who-wants-to-reach-us
+Word too long: great-great-great-great-great-great
+Word too long: great-great-great-great-great-great
+File IO errors: 0
+TIKA errors: 0
+SAX errors: 0
+Encrypted documents: 0

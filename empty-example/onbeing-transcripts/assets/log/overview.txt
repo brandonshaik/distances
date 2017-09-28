@@ -1,0 +1,5 @@
+File parse timestamp: 1503072792088
+356 files parsed in 0:04
+Files parsed with at least some content retrieved: 356
+Files parsed with at least some metadata retrieved: 0
+File extensions sorted in order of frequency
