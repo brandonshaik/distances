@@ -1,70 +1,152 @@
 var data;
-var titles = [];
+var terms = [];
 
+
+var $closestDiv;
 
 
 function preload(){
-	data = loadJSON("distances.json")
+	data = loadJSON("smallDist.json")
 }
 
 function setup(){
-	console.log(data);
 	noCanvas();
 
-	var trans = {};
+	$closestDiv = $('#closest');
 
-	var dropdown1 = createSelect();
-	var dropdown2 = createSelect();
+	var allTerms = {};
+
+	var dropdown = createSelect();
 
 	var button = createButton("submit");
 
-
 	for (var i = 0; i < Object.keys(data).length; i++){
-		texts = data[i].texts;
-		titles.push(texts);
+		term = data[i].term;
+		terms.push(term);
 
-		dropdown1.option(texts);
-		dropdown2.option(texts);
+		dropdown.option(term);
 
-		trans[texts] = data[i];
+		allTerms[term] = data[i];
 
 
 	}
 	
-	console.log(data);
-	console.log(trans);
+	// console.log(data);
+	console.log(allTerms);
 
 	button.mousePressed(simScores);
 
-	function simScores(){
-		var text1 = dropdown1.value();
-		var text2 = dropdown2.value();
 
-		var title1 = trans[text1];
-		var title2 = trans[text2];
 
-		var titles = Object.keys(title1);
+	// function findNearestNeighbor(){
 
-		var i = titles.indexOf("texts");
-		titles.splice(i, 1);
+	// 	var text = dropdown.value();
+		
+	// 	var similarityScores = [];
 
-		var j = titles.indexOf("");
-		titles.splice(j, 1);
 
-		console.log(titles);
+	// 	for (var i =0; i < Object.keys(data).length; i++){
+	// 		var other = data[i].terms;
 
-		for (var i = 0; i < titles.length; i++){
-			var title = titles[i];
+	// 		console.log(terms);
 
-			var score1 = title1[title];
-			var score2 = title2[title];
-			console.log(score1);
+	// 		if(other != text) {
+	// 			var similarity = simScores (text, other);
 
-			}
-			console.log(score1);
-			console.log(score2);
+	// 			similarityScores[i] = similarity;
+
+	// 		}
+	// 	}
+
+	// 	console.log(similarity);
+	// }
+
+
+
+	function simScores(text){
+
+		var text = dropdown.value();
+
+
+		var term1 = allTerms[text];
+
+		console.log(term1);
+
+		var sortable = [];
+
+		for (var term in term1) {
+    	sortable.push([term, term1[term]]);
+		}
+
+		$closestDiv.empty();
+
+		var sortable = sortable.sort(function(a, b) {
+		    return a[1] - b[1];
+		});
+
+		$.each(sortable, function( key  , value ) {
+  			
+  			var $p = $("<p>")
+  			$p.text(value[0] + ': ' + value[1]);
+  			$closestDiv.append($p);
+  			// createP(value, closestDiv);
+
+
+		});
+		
+
+		
+
 	}
-			
+};
 
-}
+
+		// var i = terms.indexOf("texts");
+		// terms.splice(i, 1);
+
+		// var j = terms.indexOf("");
+		// terms.splice(j, 1);
+
+		// console.log(terms);
+
+		// for (var i = 0; i < terms.length; i++){
+		// 	var title = terms[i];
+
+		// 	var score1 = term1[title];
+			
+		// 	// console.log(score1);
+
+		// 	}
+			
+			// var sorted_array = sortData();
+			// console.log(sorted_array);
+
+
+
+
+// function sortData(){ 
+// 	console.log(data);
+// 	var data_array = Object.keys(data).map(function(key) {
+// 	  return [Number(key), data[key]];
+// 	});
+
+// 	data_array.sort(function(a,b){
+// 		if(a.terms > b.terms) return -1;
+// 		if(a.terms < b.terms) return 1;
+// 		if(a.terms == b.terms) return 0;
+// 	});
+
+// 	console.log(data_array);
+
+// 	return data_array;
+
+
+
+  // [].slice.call(data).sort(function(a,b){ 
+  //   console.log(a.title, b.title);
+  // }); 
+
+
+
+
 
